@@ -6,10 +6,10 @@ pool:
 
 variables:
   buildConfiguration: Release
-  projectToPack: src/OffSync.Mapping.Practises/OffSync.Mapping.Practises.csproj
 
 steps:
 - task: DotNetCoreCLI@2
+  displayName: Restore
   inputs:
     command: restore
     projects: '**/*.csproj'
@@ -21,9 +21,11 @@ steps:
     projects: '**/*.csproj'
     arguments: '--configuration $(buildConfiguration)'
 
-- task: NuGetCommand@2
+- task: DotNetCoreCLI@2
+  displayName: Pack OffSync.Mapping.Practises
   inputs:
     command: pack
-    packagesToPack: '$(projectToPack)'
+    projects: 'src/OffSync.Mapping.Practises/OffSync.Mapping.Practises.csproj'
+    arguments: '--configuration $(buildConfiguration)'
 
 - task: PublishBuildArtifacts@1
