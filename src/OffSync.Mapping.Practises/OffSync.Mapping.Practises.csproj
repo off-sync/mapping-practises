@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Authors>basverweij</Authors>
+    <Copyright>Off-Sync.com</Copyright>
+    <PackageDescription>Provides abstractions for building applications using a mapper.</PackageDescription>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageTags>mapper;mapping;practises</PackageTags>
+    <RepositoryUrl>https://github.com/off-sync/mapping-practises</RepositoryUrl>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Title>Off-Sync.Com Mapping Practises</Title>
+    <VersionPrefix>1.0.0</VersionPrefix>
+    <VersionSuffix>$(VersionSuffix)</VersionSuffix>
+  </PropertyGroup>
+
+</Project>
