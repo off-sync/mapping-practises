@@ -23,11 +23,10 @@ steps:
     projectName: 'Off-Sync.Com Mapping Practises'
 
 - task: DotNetCoreCLI@2
-  displayName: 'Build Projects'
+  displayName: 'Build Solution'
   inputs:
     command: build
     arguments: '--configuration $(buildConfiguration)'
-    projects: '**/*.csproj'
 
 - task: SonarCloudAnalyze@1
   displayName: 'Run Code Analysis'
