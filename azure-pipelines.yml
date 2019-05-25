@@ -19,3 +19,5 @@ steps:
     command: build
     projects: '**/*.csproj'
     arguments: '--configuration $(buildConfiguration)'
+
+- task: PublishBuildArtifacts@1
