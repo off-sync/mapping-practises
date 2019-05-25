@@ -19,7 +19,7 @@ steps:
   inputs:
     SonarCloud: 'SonarCloud'
     organization: 'off-sync'
-    projectKey: 'mapping-practises'
+    projectKey: 'off-sync_mapping-practises'
     projectName: 'Off-Sync.Com Mapping Practises'
 
 - task: DotNetCoreCLI@2
