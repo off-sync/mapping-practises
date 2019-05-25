@@ -1,4 +1,4 @@
-﻿trigger:
+trigger:
 - develop
 
 pool:
@@ -9,24 +9,40 @@ variables:
 
 steps:
 - task: DotNetCoreCLI@2
-  displayName: Restore Packages
+  displayName: 'Restore Packages'
   inputs:
     command: restore
     projects: '**/*.csproj'
 
+- task: SonarCloudPrepare@1
+  displayName: 'Prepare Code Analysis'
+  inputs:
+    SonarCloud: 'SonarCloud'
+    organization: 'off-sync'
+    projectKey: 'mapping-practises'
+    projectName: 'Off-Sync.Com Mapping Practises'
+
 - task: DotNetCoreCLI@2
-  displayName: Build Projects
+  displayName: 'Build Projects'
   inputs:
     command: build
     arguments: '--configuration $(buildConfiguration)'
     projects: '**/*.csproj'
 
+- task: SonarCloudAnalyze@1
+  displayName: 'Run Code Analysis'
+  inputs: {}
+
+- task: SonarCloudPublish@1
+  displayName: 'Publish Code Analysis'
+  inputs: {}
+
 - task: DotNetCoreCLI@2
-  displayName: Pack OffSync.Mapping.Practises
+  displayName: 'Pack OffSync.Mapping.Practises'
   inputs:
     command: pack
     arguments: '--configuration $(buildConfiguration) --no-build'
     projects: 'src/OffSync.Mapping.Practises/OffSync.Mapping.Practises.csproj'
 
 - task: PublishBuildArtifacts@1
-  displayName: Publish Build Artifacts
+  displayName: 'Publish Build Artifacts'
