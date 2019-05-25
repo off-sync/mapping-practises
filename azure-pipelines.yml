@@ -9,23 +9,32 @@ variables:
 
 steps:
 - task: DotNetCoreCLI@2
-  displayName: Restore
+  displayName: Restore Packages
   inputs:
     command: restore
     projects: '**/*.csproj'
 
 - task: DotNetCoreCLI@2
-  displayName: Build
+  displayName: Build Projects
   inputs:
     command: build
-    projects: '**/*.csproj'
     arguments: '--configuration $(buildConfiguration)'
+    projects: '**/*.csproj'
 
 - task: DotNetCoreCLI@2
   displayName: Pack OffSync.Mapping.Practises
   inputs:
     command: pack
+    arguments: '--configuration $(buildConfiguration) --no-build'
     projects: 'src/OffSync.Mapping.Practises/OffSync.Mapping.Practises.csproj'
-    arguments: '--configuration $(buildConfiguration)'
 
 - task: PublishBuildArtifacts@1
+  displayName: Publish Build Artifacts
+
+- task: DotNetCoreCLI@2
+  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+  displayName: Push NuGet Package
+  inputs:
+    command: push
+    arguments: '--api-key $(nuget.apiKey)'
+    packagesToPush: '$(Build.ArtifactStagingDirectory)/*.nupkg'
