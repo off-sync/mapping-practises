@@ -1,19 +1,7 @@
-trigger:
-- develop
-
 pool:
-  vmImage: 'windows-latest'
-
-variables:
-  buildConfiguration: Release
+  vmImage: 'windows-2019'
 
 steps:
-- task: DotNetCoreCLI@2
-  displayName: 'Restore Packages'
-  inputs:
-    command: restore
-    projects: '**/*.csproj'
-
 - task: SonarCloudPrepare@1
   displayName: 'Prepare Code Analysis'
   inputs:
@@ -26,7 +14,7 @@ steps:
   displayName: 'Build Solution'
   inputs:
     command: build
-    arguments: '--configuration $(buildConfiguration)'
+    arguments: '--configuration Debug'
 
 - task: SonarCloudAnalyze@1
   displayName: 'Run Code Analysis'
@@ -40,7 +28,7 @@ steps:
   displayName: 'Pack OffSync.Mapping.Practises'
   inputs:
     command: pack
-    arguments: '--configuration $(buildConfiguration) --no-build'
+    arguments: '--configuration Release'
     projects: 'src/OffSync.Mapping.Practises/OffSync.Mapping.Practises.csproj'
 
 - task: PublishBuildArtifacts@1
