@@ -1,20 +1,10 @@
-trigger:
-- develop
-- master
-
 pool:
-  vmImage: 'windows-latest'
+  vmImage: 'windows-2019'
 
 variables:
   buildConfiguration: Release
 
 steps:
-- task: DotNetCoreCLI@2
-  displayName: 'Restore Packages'
-  inputs:
-    command: restore
-    projects: '**/*.csproj'
-
 - task: SonarCloudPrepare@1
   displayName: 'Prepare Code Analysis'
   inputs:
