@@ -5,9 +5,16 @@
 
 namespace OffSync.Mapping.Practises
 {
-    public interface IMapper<in TSource, out TTarget>
+    public static class MapperExtensions
     {
-        TTarget Map(
-            TSource source);
+        public static TTarget MapRoot<TSource, TTarget>(
+            this IMapper<TSource, TTarget> mapper,
+            TSource root)
+        {
+            using (MappingContext.Create())
+            {
+                return mapper.Map(root);
+            }
+        }
     }
 }
