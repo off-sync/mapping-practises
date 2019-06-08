@@ -19,6 +19,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{1461B004-C53
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{1022FF0A-8948-457C-BB4E-7F9466A5AA04}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".azure-pipelines", ".azure-pipelines", "{4C217E63-1E58-47F8-969D-6D1745301450}"
+	ProjectSection(SolutionItems) = preProject
+		.azure-pipelines\pack-project-step-template.yml = .azure-pipelines\pack-project-step-template.yml
+		.azure-pipelines\test-project-step-template.yml = .azure-pipelines\test-project-step-template.yml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
