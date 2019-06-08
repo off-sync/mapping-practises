@@ -3,11 +3,19 @@
  *  Licensed under the MIT License. See LICENSE in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
+using System;
+
 namespace OffSync.Mapping.Practises
 {
-    public interface IMapper<in TSource, out TTarget>
+    public interface IMappingContext :
+        IDisposable
     {
-        TTarget Map(
-            TSource source);
+        bool TryGetMapping(
+            object source,
+            out object target);
+
+        void AddMapping(
+            object source,
+            object target);
     }
 }

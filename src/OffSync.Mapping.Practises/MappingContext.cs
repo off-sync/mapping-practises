@@ -5,9 +5,18 @@
 
 namespace OffSync.Mapping.Practises
 {
-    public interface IMapper<in TSource, out TTarget>
+    public sealed partial class MappingContext :
+        IMappingContext
     {
-        TTarget Map(
-            TSource source);
+        private MappingContext()
+        {
+        }
+
+        public void Dispose()
+        {
+            _mappings.Clear();
+
+            _current.Value = null;
+        }
     }
 }
