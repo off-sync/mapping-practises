@@ -6,6 +6,8 @@ jobs:
 - job: TestWindows
   pool:
     vmImage: 'windows-2019'
+  variables:
+    BuildConfiguration: Release
   strategy:
     matrix:
       NetCoreApp2_2:
@@ -17,7 +19,6 @@ jobs:
     displayName: 'Build Solution'
     inputs:
       command: build
-      arguments: '--configuration Release'
 
   - template: .azure-pipelines/test-project-step-template.yml
     parameters:
@@ -38,6 +39,8 @@ jobs:
   dependsOn: [ TestWindows ]
   pool:
     vmImage: 'windows-2019'
+  variables:
+    BuildConfiguration: Release
   steps:
   - task: DownloadPipelineArtifact@1
     inputs:
@@ -58,7 +61,6 @@ jobs:
     displayName: 'Build Solution'
     inputs:
       command: build
-      arguments: '--configuration Debug'
   
   - task: SonarCloudAnalyze@1
     displayName: 'Run Code Analysis'
@@ -83,6 +85,8 @@ jobs:
   dependsOn: [ Quality ]
   pool:
     vmImage: 'windows-2019'
+  variables:
+    BuildConfiguration: Release
   steps:
   - template: .azure-pipelines/pack-project-step-template.yml
     parameters:
