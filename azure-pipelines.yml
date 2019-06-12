@@ -19,6 +19,7 @@ jobs:
     displayName: 'Build Solution'
     inputs:
       command: build
+      arguments: '--configuration $(BuildConfiguration)'
 
   - template: .azure-pipelines/test-project-step-template.yml
     parameters:
@@ -61,6 +62,7 @@ jobs:
     displayName: 'Build Solution'
     inputs:
       command: build
+      arguments: '--configuration $(BuildConfiguration)'
   
   - task: SonarCloudAnalyze@1
     displayName: 'Run Code Analysis'
